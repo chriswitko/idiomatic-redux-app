@@ -55,9 +55,15 @@ export const authorizeUser = () => (dispatch) => {
 }
 
 export const loginUser = () => (dispatch) => {
-  console.log('action:loginUser')
   dispatch({
     type: 'FETCH_USER_REQUEST',
     status: true
+  })
+}
+
+export const logoutUser = () => (dispatch) => {
+  dispatch({
+    type: 'FETCH_USER_LOGOUT',
+    status: false
   })
 }

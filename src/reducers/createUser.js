@@ -3,19 +3,14 @@ import { combineReducers } from 'redux';
 const createUser = () => {
 
   const isLoggedIn = (state = false, action) => {
-    console.log('isLoggedIn:action', action, state)
     switch (action.type) {
       case 'FETCH_USER_REQUEST':
-        console.log('A1')
         return true;
       case 'FETCH_USER_SUCCESS':
-        console.log('A2')
         return true;
-      case 'FETCH_USER_FAILURE':
-        console.log('A3')
+      case 'FETCH_USER_LOGOUT':
         return false;
       default:
-        console.log('A4')
         return state;
     }
   };
@@ -28,7 +23,6 @@ const createUser = () => {
 export default createUser;
 
 export const getIsLoggedIn = (state) => {
-  console.log('getIsLoggedIn state', state)
   return state
 };
 

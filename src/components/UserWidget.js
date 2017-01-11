@@ -55,11 +55,7 @@ class UserWidget extends Component {
   // }
 
   render() {
-    console.log('this.props.dispatch2', this.props)
-    const { todos, myClick, myLoggedIn, isLoggedIn } = this.props;
-    console.log('this.props.dispatch3', myLoggedIn)
-    console.log('this.state', this.state)
-    // const { onClick } = this.handlers
+    const { myClick, myLogoutClick, myLoggedIn } = this.props;
 
     return (
       <div>
@@ -71,7 +67,7 @@ class UserWidget extends Component {
           {" "}
           <button
           type="button"
-          onClick={myClick}
+          onClick={myLoggedIn ? myLogoutClick : myClick}
           >{myLoggedIn ? "Log Out" : "Log In"}</button>
         </p>      
       </div>
@@ -82,15 +78,13 @@ class UserWidget extends Component {
 const mapDispatchToProps = (dispatch) => {
   return {
     myClick: () => dispatch(actions.loginUser()),
+    myLogoutClick: () => dispatch(actions.logoutUser()),
   };
 };
 
 const mapStateToProps = (state) => {
-  console.log('mapping states', getIfUserIsLoggedIn(state))
-  // return {state}
   return {
-    isLoggedIn: getIfUserIsLoggedIn(state),
-    myLoggedIn: getIfUserIsLoggedIn(state)//state.userStatus.status.isLoggedIn
+    myLoggedIn: getIfUserIsLoggedIn(state)
   };
 };
 
