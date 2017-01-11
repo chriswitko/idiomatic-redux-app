@@ -29,18 +29,18 @@ class UserWidget extends Component {
 
   fetchData() {
     const { filter, isLoggedIn } = this.props;
-    authorizeUser()
+    // authorizeUser()
   }
 
   componentDidMount() {
     console.log('componentDidMount')
-    this.fetchData()
+    // this.fetchData()
     // this.fetchData();
   }
 
   componentDidUpdate(prevProps) {
     console.log('componentDidUpdate', prevProps)
-    this.fetchData()
+    // this.fetchData()
     // if (this.props.filter !== prevProps.filter) {
     //   this.fetchData();
     // }
@@ -68,7 +68,8 @@ class UserWidget extends Component {
           <button
           type="button"
           onClick={myLoggedIn ? myLogoutClick : myClick}
-          >{myLoggedIn ? "Log Out" : "Log In"}</button>
+          >{myLoggedIn ? "Log Out" : "Log In"}
+          </button>
         </p>      
       </div>
     );
