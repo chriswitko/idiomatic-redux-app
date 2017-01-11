@@ -1,16 +1,22 @@
 import { combineReducers } from 'redux';
 import byId, * as fromById  from './byId';
 import createList, * as fromList from './createList';
+import createUser, * as fromUser from './createUser';
 
 const listByFilter = combineReducers({
   all: createList('all'),
   active: createList('active'),
-  completed: createList('completed')
+  completed: createList('completed'),
 });
+
+const userStatus = combineReducers({
+  status: createUser()
+})
 
 const todos = combineReducers({
   byId,
-  listByFilter
+  listByFilter,
+  userStatus
 });
 
 export default todos;
@@ -25,3 +31,9 @@ export const getIsFetching = (state, filter) =>
 
 export const getErrorMessage = (state, filter) =>
   fromList.getErrorMessage(state.listByFilter[filter]);
+
+export const getIfUserIsLoggedIn = (state) => {
+  console.log('get getIfUserIsLoggedIn', fromUser.getIsLoggedIn(state.userStatus.status.isLoggedIn))
+  return fromUser.getIsLoggedIn(state.userStatus.status.isLoggedIn);
+}
+  

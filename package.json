@@ -2,19 +2,19 @@
   "name": "idiomatic-redux-app",
   "version": "0.0.0",
   "description": "Idiomatic Redux App",
-  "author": "Jakub Siemiatkowski <kuba@saskla.cz>",
+  "author": "Chris Witko <chris.witko@gmail.com>",
   "scripts": {
     "start": "node server.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/siemiatj/idiomatic-redux-app.git"
+    "url": "https://github.com/chriswitko/idiomatic-redux-app.git"
   },
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/siemiatj/idiomatic-redux-app/issues"
+    "url": "https://github.com/chriswitko/idiomatic-redux-app/issues"
   },
-  "homepage": "https://saskla.cz",
+  "homepage": "https://chriswitko.com",
   "dependencies": {
     "babel-polyfill": "^6.3.14",
     "lodash": "^4.13.1",

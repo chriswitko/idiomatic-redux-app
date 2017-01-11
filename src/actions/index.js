@@ -46,3 +46,18 @@ export const toggleTodo = (id) => (dispatch) =>
     });
   });
 
+export const authorizeUser = () => (dispatch) => {
+  console.log('action:authorizeUser')
+  dispatch({
+    type: 'FETCH_USER_SUCCESS',
+    status: true
+  })
+}
+
+export const loginUser = () => (dispatch) => {
+  console.log('action:loginUser')
+  dispatch({
+    type: 'FETCH_USER_REQUEST',
+    status: true
+  })
+}
