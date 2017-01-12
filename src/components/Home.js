@@ -5,6 +5,10 @@ import Nav from './Nav';
 class Home extends Component {
   constructor(props={}) {
     super();
+
+    this.prev = this.prev.bind(this)
+    this.next = this.next.bind(this)
+
     this.state = props;
   }
   // getInitialState() {
@@ -12,15 +16,15 @@ class Home extends Component {
   // }
 
   componentDidMount() {
-    self.siema = new Siema();
+    this.siema = new Siema();
   }
 
   prev() {
-    self.siema.prev()
+    this.siema.prev()
   };
   
   next() {
-    self.siema.next()
+    this.siema.next()
   };  
 
   render() {

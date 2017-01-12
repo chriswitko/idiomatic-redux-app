@@ -1,0 +1,73 @@
+exports[`test should render a Home component 1`] = `
+<div>
+  <Nav />
+  <div
+    className="siema">
+    <div>
+      <img
+        alt="Siema image"
+        src="https://pawelgrzybek.com/siema/assets/siema--pink.svg" />
+    </div>
+    <div>
+      <img
+        alt="Siema image"
+        src="https://pawelgrzybek.com/siema/assets/siema--yellow.svg" />
+    </div>
+    <div>
+      <img
+        alt="Siema image"
+        src="https://pawelgrzybek.com/siema/assets/siema--pink.svg" />
+    </div>
+    <div>
+      <img
+        alt="Siema image"
+        src="https://pawelgrzybek.com/siema/assets/siema--yellow.svg" />
+    </div>
+  </div>
+  <button
+    onClick={[Function]}>
+    Prev
+  </button>
+  <button
+    onClick={[Function]}>
+    Next
+  </button>
+</div>
+`;
+
+exports[`test should render a label 1`] = `
+<div>
+  <Nav />
+  <div
+    className="siema">
+    <div>
+      <img
+        alt="Siema image"
+        src="https://pawelgrzybek.com/siema/assets/siema--pink.svg" />
+    </div>
+    <div>
+      <img
+        alt="Siema image"
+        src="https://pawelgrzybek.com/siema/assets/siema--yellow.svg" />
+    </div>
+    <div>
+      <img
+        alt="Siema image"
+        src="https://pawelgrzybek.com/siema/assets/siema--pink.svg" />
+    </div>
+    <div>
+      <img
+        alt="Siema image"
+        src="https://pawelgrzybek.com/siema/assets/siema--yellow.svg" />
+    </div>
+  </div>
+  <button
+    onClick={[Function]}>
+    Prev
+  </button>
+  <button
+    onClick={[Function]}>
+    Next
+  </button>
+</div>
+`;

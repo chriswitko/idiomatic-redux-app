@@ -9,7 +9,7 @@ const Root = ({ store }) => (
     <Router history={browserHistory}>
       <Route path="/" component={Home} />
       <Route path="/todo/" component={App}>
-        <Route path="/todo/:filter" component={App}/>
+        <Route path=":filter" component={App}/>
       </Route>
     </Router>
   </Provider>
