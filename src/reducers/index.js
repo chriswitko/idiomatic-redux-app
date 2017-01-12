@@ -33,7 +33,6 @@ export const getErrorMessage = (state, filter) =>
   fromList.getErrorMessage(state.listByFilter[filter]);
 
 export const getIfUserIsLoggedIn = (state) => {
-  console.log('get getIfUserIsLoggedIn', fromUser.getIsLoggedIn(state.userStatus.status.isLoggedIn))
   return fromUser.getIsLoggedIn(state.userStatus.status.isLoggedIn);
 }
   

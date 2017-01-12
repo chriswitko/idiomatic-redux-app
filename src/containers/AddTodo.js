@@ -29,12 +29,12 @@ class AddTodo extends Component {
       <div>
         <form onSubmit={e => {
           e.preventDefault();
-          console.log('value', this.state.value)
+          
           if (!this.state.value.trim()) {
             return;
           }
           addTodo(this.state.value);
-          console.log('this.state', this.state)
+          
           this.setState({value: ''});
         }}>
           <input type="text" value={this.state.value} onChange={this.handleChange} />
