@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import * as actions from '../actions';
-import { getIfUserIsLoggedIn } from '../reducers';
+import { getCurrentUser } from '../reducers';
 import TodoList from '../components/TodoList';
 import FetchError from '../components/FetchError';
 import { loginUser, authorizeUser } from '../actions';
@@ -55,20 +55,20 @@ class UserWidget extends Component {
   // }
 
   render() {
-    const { myClick, myLogoutClick, myLoggedIn } = this.props;
+    const { myClick, myLogoutClick, user } = this.props;
 
     return (
       <div>
         <p>
           {"("}
-          {myLoggedIn}
+          {user.isLoggedIn}
           {")"}
-          {myLoggedIn ? "Logged In" : "Not logged In"}
+          {user.isLoggedIn ? "Logged In" : "Not logged In"}
           {" "}
           <button
           type="button"
-          onClick={myLoggedIn ? myLogoutClick : myClick}
-          >{myLoggedIn ? "Log Out" : "Log In"}
+          onClick={user.isLoggedIn ? myLogoutClick : myClick}
+          >{user.isLoggedIn ? "Log Out" : "Log In"}
           </button>
         </p>      
       </div>
@@ -85,7 +85,7 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
   return {
-    myLoggedIn: getIfUserIsLoggedIn(state)
+    user: getCurrentUser(state)
   };
 };
 

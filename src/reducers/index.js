@@ -32,9 +32,8 @@ export const getIsFetching = (state, filter) =>
 export const getErrorMessage = (state, filter) =>
   fromList.getErrorMessage(state.listByFilter[filter]);
 
-export const getIfUserIsLoggedIn = (state) => {
-  console.log('getIfUserIsLoggedIn state', state)
-  return fromUser.getIsLoggedIn(state);
+export const getCurrentUser = (state) => {
+  return fromUser.getCurrentUser(state)
   // return fromUser.state.
 }
   

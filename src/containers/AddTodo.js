@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addTodo } from '../actions';
 import * as actions from '../actions';
-import { getIfUserIsLoggedIn } from '../reducers';
+import { getCurrentUser } from '../reducers';
 
 class AddTodo extends Component {
   constructor(props) {
@@ -23,7 +23,7 @@ class AddTodo extends Component {
   }
 
   render() {
-    const { myLoggedIn, addTodo } = this.props;
+    const { user, addTodo } = this.props;
 
     return (
       <div>
@@ -38,7 +38,7 @@ class AddTodo extends Component {
           this.setState({value: ''});
         }}>
           <input type="text" value={this.state.value} onChange={this.handleChange} />
-          <button type="submit" disabled={!myLoggedIn}>
+          <button type="submit" disabled={!user.isLoggedIn}>
             Add Todo
           </button>
         </form>
@@ -56,7 +56,7 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
   return {
-    myLoggedIn: getIfUserIsLoggedIn(state)
+    user: getCurrentUser(state)
   };
 };
 
