@@ -23,6 +23,10 @@ const createUser = () => {
 export default createUser;
 
 export const getIsLoggedIn = (state) => {
+  console.log('YYY:state', state)
+  if ( state.user ) {
+    return state.user.current.isLoggedIn
+  }
   return state
 };
 

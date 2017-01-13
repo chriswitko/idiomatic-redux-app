@@ -9,14 +9,14 @@ const listByFilter = combineReducers({
   completed: createList('completed'),
 });
 
-const userStatus = combineReducers({
-  status: createUser()
+const user = combineReducers({
+  current: createUser()
 })
 
 const todos = combineReducers({
   byId,
   listByFilter,
-  userStatus
+  user,
 });
 
 export default todos;
@@ -33,6 +33,8 @@ export const getErrorMessage = (state, filter) =>
   fromList.getErrorMessage(state.listByFilter[filter]);
 
 export const getIfUserIsLoggedIn = (state) => {
-  return fromUser.getIsLoggedIn(state.userStatus.status.isLoggedIn);
+  console.log('getIfUserIsLoggedIn state', state)
+  return fromUser.getIsLoggedIn(state);
+  // return fromUser.state.
 }
   
