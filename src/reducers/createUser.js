@@ -22,8 +22,7 @@ const createUser = () => {
 
 export default createUser;
 
-export const getCurrentUser = (state) => {
-  console.log('YYY:state', state)
+export const getCurrentUser = (state = null) => {
   if ( state ) {
     return state.user.current
   }
