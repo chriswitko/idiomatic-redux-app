@@ -34,15 +34,21 @@ class MyComp extends Component {
   dragMoveListener (event) {
     var target = event.target,
         // keep the dragged position in the data-x/data-y attributes
+        // x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
+        // y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
         x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
         y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+        
+    if (parseFloat(target.getAttribute('data-x')) >= 500) {
+      // console.log('float x', parseFloat(target.getAttribute('data-x')))
+    }
 
     // translate the element
-    target.style.webkitTransform =
-    target.style.transform =
-      'translate(' + x + 'px, ' + y + 'px)';
-    // target.style.left = x + 'px'
-    // target.style.top = y + 'px'
+    // target.style.webkitTransform =
+    // target.style.transform =
+    //   'translate(' + x + 'px, ' + y + 'px)';
+    target.style.left = x + 'px'
+    target.style.top = y + 'px'
 
     // update the posiion attributes
     target.setAttribute('data-x', x);
@@ -61,6 +67,7 @@ class MyComp extends Component {
       ondropactivate: function (event) {
         // add active dropzone feedback
         event.target.classList.add('drop-active');
+        console.log('zone active', event)
       },
       ondragenter: function (event) {
         var draggableElement = event.relatedTarget,
@@ -69,6 +76,9 @@ class MyComp extends Component {
         dropzoneElement.classList.add('drop-target');
         draggableElement.classList.add('can-drop');
         draggableElement.textContent = 'Dragged in';
+        console.log('zone over', dropzoneElement)
+        dropzoneElement.appendChild(draggableElement)
+        console.log('zone over el', event)
       },
       ondragleave: function (event) {
         // remove the drop feedback style
@@ -79,16 +89,16 @@ class MyComp extends Component {
       ondrop: function (event) {
         event.relatedTarget.textContent = 'Dropped2';
         // event.target.
-        console.log('dragged', event)
-        console.log('event.dragEvent', event.dragEvent)
-        event.relatedTarget.style.left = event.dragEvent.snap.dx + 'px'//event.dragEvent.dy +
-        event.relatedTarget.style.top =  event.dragEvent.snap.dy + 'px'
+        // console.log('dragged', event)
+        // console.log('event.dragEvent', event.dragEvent)
+        // event.relatedTarget.style.left = event.dragEvent.snap.dx + 'px'//event.dragEvent.dy +
+        // event.relatedTarget.style.top =  event.dragEvent.snap.dy + 'px'
 
         // event.relatedTarget.style.left = 0;
         // event.relatedTarget.style.top = 0;
         // event.target.children.push(event.relatedTarget)
         event.target.appendChild(event.relatedTarget)
-        console.log('event.target', event.target)
+        console.log('new zone', event)
 
       },
       ondropdeactivate: function (event) {
@@ -100,6 +110,17 @@ class MyComp extends Component {
   }
 
   resizableListener (event) {
+// var target = event.target,
+//         x = (parseFloat(target.getAttribute('data-x')) || 0),
+//         y = (parseFloat(target.getAttribute('data-y')) || 0);
+//         target.style.width  = (event.rect.width / scalex) + 'px';
+//         target.style.height = (event.rect.height / scaley) + 'px';
+//         x += event.deltaRect.left;
+//         y += event.deltaRect.top;
+//         target.style.webkitTransform = target.style.transform =
+//             'translate(' + x + 'px,' + y + 'px)';
+//             target.setAttribute('data-x', x);
+//             target.setAttribute('data-y', y);    
     var target = event.target,
         x = (parseFloat(target.getAttribute('data-x')) || 0),
         y = (parseFloat(target.getAttribute('data-y')) || 0);
@@ -112,8 +133,12 @@ class MyComp extends Component {
     x += event.deltaRect.left;
     y += event.deltaRect.top;
 
-    target.style.webkitTransform = target.style.transform =
-        'translate(' + x + 'px,' + y + 'px)';
+    // target.style.webkitTransform = target.style.transform =
+    //     'translate(' + x + 'px,' + y + 'px)';
+
+    target.style.width = x + 'px'
+    target.style.height = y + 'px'
+
 
     target.setAttribute('data-x', x);
     target.setAttribute('data-y', y);
@@ -128,23 +153,38 @@ class MyComp extends Component {
       el.classList.add('draggable')
       console.log('el', el)
 
+      console.log('this.parentNode', this)
+
     this.interactable = interact(el);
     this.interactable
+        .origin("parent")
         .draggable({
           snap: {
-                targets: [
-                  interact.createSnapGrid({ x: 1, y: 1 })
-                ],
-                range: Infinity,
-                relativePoints: [ { x: 0, y: 0 } ]
-              },
-          //     inertia: true,
-          //     restrict: {
-          //       restriction: this.parentNode,
-          //       elementRect: { top: 0, left: 0, bottom: 1, right: 1 },
-          //       endOnly: true
-          //     },       
-            onmove: this.dragMoveListener
+            targets: [
+              interact.createSnapGrid({ x: 1, y: 1 })
+            ],
+            range: Infinity,
+            relativePoints: [ { x: 0, y: 0 } ]
+          },
+          inertia: true,
+          restrict: {
+            restriction: "parent",
+            elementRect: { top: 0, left: 0, bottom: 1, right: 1 },
+            endOnly: true
+          },       
+          onmove: this.dragMoveListener,
+          onend: function (event) {
+              var target = event.target,
+              x = (parseFloat(target.getAttribute('data-x')) || 0),
+              y = (parseFloat(target.getAttribute('data-y')) || 0);
+              // setPositionInputValues(x, y);
+              console.log('end x', x)
+              console.log('class', event.target)
+              var theCSSprop = window.getComputedStyle(event.target,null)//.getPropertyValue("height");
+              console.log('theCSSprop', theCSSprop)
+              console.log('style', event.target.style.cssText)
+              console.log('.ownerDocument.defaultView;', event.target.ownerDocument.defaultView)
+          }
         }).resizable({
           preserveAspectRatio: true,
           edges: { left: true, right: true, bottom: true, top: true }
@@ -167,7 +207,7 @@ class MyComp extends Component {
 
   render() {
     const { children } = this.props
-    return (<div className="dropzone" style={{border: '1px solid red', width: '500px', height: '300px'}} > {
+    return (<div className="dropzone" style={{float: 'left', border: '1px solid red', width: '500px', height: '300px', position: 'relative'}} > {
         Children.map(children, (child, idx) => {
           const ref = `child${idx}`
           return cloneElement(child, { ref });
@@ -298,12 +338,12 @@ class Home extends Component {
         <div>
           <MyComp id="first" childAttr={{'data-x':'value'}}>
             <img src="https://scontent.xx.fbcdn.net/v/t1.0-1/c0.0.320.320/p320x320/15873276_10154860977474293_2459111570042632076_n.jpg?oh=2bf9c092c981dc9d8dc57c363f3b5f1b&oe=5923B5D6" width="100" height="100" style={{position: 'absolute'}}/>
-            <div style={{backgroundColor: 'yellow', display: 'table'}}>top frame</div>
-            <div style={{backgroundColor: 'blue', display: 'table'}}>special image</div>
+            <div style={{backgroundColor: 'yellow', display: 'table', position: 'absolute'}}>top frame</div>
+            <div style={{backgroundColor: 'blue', display: 'table', position: 'absolute'}}>special image</div>
           </MyComp>
           <MyComp if="second" childAttr={{'data-x':'value'}}>
-            <div style={{backgroundColor: 'yellow', display: 'table'}}>left frame</div>
-            <div style={{backgroundColor: 'blue', display: 'table'}}>special image</div>
+            <div style={{backgroundColor: 'yellow', display: 'table', position: 'absolute'}}>left frame</div>
+            <div style={{backgroundColor: 'blue', display: 'table', position: 'absolute'}}>special image</div>
           </MyComp>
         </div>
         
