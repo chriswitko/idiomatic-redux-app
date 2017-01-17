@@ -206,7 +206,7 @@ class MyComp extends Component {
 
   render() {
     const { children } = this.props
-    return (<div className="dropzone" style={{float: 'left', border: '1px solid red', width: '500px', height: '300px', position: 'relative'}} > {
+    return (<div className="dropzone" style={{float: 'left', border: '1px solid red', width: '500px', height: '300px', position: 'relative', overflow: 'hidden'}} > {
         Children.map(children, (child, idx) => {
           const ref = `child${idx}`
           return cloneElement(child, { ref });
