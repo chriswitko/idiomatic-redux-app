@@ -188,7 +188,23 @@ class MyComp extends Component {
           preserveAspectRatio: true,
           edges: { left: true, right: true, bottom: true, top: true }
         })
-        .on('resizemove', this.resizableListener);     
+        .on('resizemove', this.resizableListener)
+        .on('tap', function (event) {
+          console.log('selected element', event)
+          event.currentTarget.style.border = '3px solid red'
+          event.currentTarget.classList.toggle('large');
+          event.currentTarget.classList.remove('rotate');
+          event.preventDefault();
+        })        
+        .on('doubletap', function (event) {
+          console.log('selected element', event.currentTarget)
+          event.currentTarget.style.border = '0'
+      
+          event.currentTarget.classList.toggle('large');
+          event.currentTarget.classList.remove('rotate');
+          event.preventDefault();
+        })        
+
     }
       // .forEach(attr => {
       //   console.log('attr', attr)
