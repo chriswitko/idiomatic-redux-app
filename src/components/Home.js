@@ -44,11 +44,11 @@ class MyComp extends Component {
     }
 
     // translate the element
-    // target.style.webkitTransform =
-    // target.style.transform =
-    //   'translate(' + x + 'px, ' + y + 'px)';
-    target.style.left = x + 'px'
-    target.style.top = y + 'px'
+    target.style.webkitTransform =
+    target.style.transform =
+      'translate(' + x + 'px, ' + y + 'px)';
+    // target.style.left = x + 'px'
+    // target.style.top = y + 'px'
 
     // update the posiion attributes
     target.setAttribute('data-x', x);
@@ -97,8 +97,8 @@ class MyComp extends Component {
         // event.relatedTarget.style.left = 0;
         // event.relatedTarget.style.top = 0;
         // event.target.children.push(event.relatedTarget)
-        event.target.appendChild(event.relatedTarget)
-        console.log('new zone', event)
+        // event.target.appendChild(event.relatedTarget)
+        console.log('new zone', event.target.innerHTML)
 
       },
       ondropdeactivate: function (event) {
@@ -117,8 +117,8 @@ class MyComp extends Component {
 //         target.style.height = (event.rect.height / scaley) + 'px';
 //         x += event.deltaRect.left;
 //         y += event.deltaRect.top;
-//         target.style.webkitTransform = target.style.transform =
-//             'translate(' + x + 'px,' + y + 'px)';
+        // target.style.webkitTransform = target.style.transform =
+        //     'translate(' + x + 'px,' + y + 'px)';
 //             target.setAttribute('data-x', x);
 //             target.setAttribute('data-y', y);    
     var target = event.target,
@@ -133,15 +133,14 @@ class MyComp extends Component {
     x += event.deltaRect.left;
     y += event.deltaRect.top;
 
-    // target.style.webkitTransform = target.style.transform =
-    //     'translate(' + x + 'px,' + y + 'px)';
-
-    target.style.width = x + 'px'
-    target.style.height = y + 'px'
-
+    target.style.webkitTransform = target.style.transform =
+        'translate(' + x + 'px,' + y + 'px)';
 
     target.setAttribute('data-x', x);
     target.setAttribute('data-y', y);
+    target.setAttribute('data-width', event.rect.width + 'px');
+    target.setAttribute('data-height', event.rect.height + 'px');
+    console.log('target resized', target)
     target.textContent = Math.round(event.rect.width) + '×' + Math.round(event.rect.height);    
   }
 
