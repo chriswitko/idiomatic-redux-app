@@ -349,7 +349,7 @@ class Home extends Component {
   }
 
   getHtml() {
-    console.log('html', this.refs.first.toString())
+    console.log('html', this.refs.first
   }
 
   render() {
