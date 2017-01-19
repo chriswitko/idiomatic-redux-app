@@ -226,7 +226,7 @@ class MyComp extends Component {
     // return {
     //   __html: "<div style='background:red;position:absolute;'>hello</div>"
     // }
-    const html = '<div style="background:red;position:absolute;">Example HTML string</div><img src="https://scontent.xx.fbcdn.net/v/t1.0-1/c0.0.320.320/p320x320/15873276_10154860977474293_2459111570042632076_n.jpg?oh=2bf9c092c981dc9d8dc57c363f3b5f1b&oe=5923B5D6" width="100" height="100"/>';
+    const html = '<style>img {border: 3px solid yellow}</style><div style="background:red;position:absolute;">Example HTML string</div><img src="https://scontent.xx.fbcdn.net/v/t1.0-1/c0.0.320.320/p320x320/15873276_10154860977474293_2459111570042632076_n.jpg?oh=2bf9c092c981dc9d8dc57c363f3b5f1b&oe=5923B5D6" width="100" height="100" style="position:absolute;"/>';
     // const html =
     //   '<b>Bold text</b>, <i>Italic text</i><br/ ><br />' +
     //   '<a href="http://www.facebook.com">Example link</a>' + 
@@ -310,6 +310,7 @@ class Home extends Component {
 
     this.prev = this.prev.bind(this)
     this.next = this.next.bind(this)
+    this.getHtml = this.getHtml.bind(this)
 
     this.state = props
   }
@@ -347,6 +348,10 @@ class Home extends Component {
     // console.log('end', e)
   }
 
+  getHtml() {
+    console.log('html', this.refs.first.toString())
+  }
+
   render() {
     const dragHandlers = {onStart: this.onStart, onStop: this.onStop};
     return (
@@ -378,7 +383,8 @@ class Home extends Component {
             />        
         </div>
         <div>
-          <MyComp id="first" html="<p>hello</p>" childAttr={{'data-x':'value'}}>
+          <button onClick={this.getHtml}>html</button>
+          <MyComp ref="first" id="first" html="<p>hello</p>" childAttr={{'data-x':'value'}}>
             <img src="https://scontent.xx.fbcdn.net/v/t1.0-1/c0.0.320.320/p320x320/15873276_10154860977474293_2459111570042632076_n.jpg?oh=2bf9c092c981dc9d8dc57c363f3b5f1b&oe=5923B5D6" width="100" height="100" style={{position: 'absolute'}}/>
             <div style={{backgroundColor: 'yellow', display: 'table', position: 'absolute'}}>top frame</div>
             <div style={{backgroundColor: 'blue', display: 'table', position: 'absolute'}}>special image</div>
