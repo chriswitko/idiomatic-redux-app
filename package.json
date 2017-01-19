@@ -33,13 +33,14 @@
     "babel-plugin-react-css-modules": "^2.1.4",
     "babel-polyfill": "^6.3.14",
     "brace": "^0.9.1",
-    "immutable": "3.8.1",
     "draft-js": "^0.9.1",
     "draft-js-export-html": "^0.5.2",
     "draft-js-import-html": "^0.3.2",
+    "html-react-parser": "^0.3.1",
+    "html-to-react": "^1.2.2",
+    "immutable": "3.8.1",
     "interact.js": "^1.2.8",
     "lodash": "^4.13.1",
-    "uuid": "^3.0.1",
     "normalizr": "^2.1.0",
     "react": "^15.4.2",
     "react-ace": "^4.1.1",
@@ -53,7 +54,8 @@
     "redux-logger": "^2.6.1",
     "redux-promise": "^0.5.3",
     "redux-thunk": "^2.1.0",
-    "siema": "^1.1.0"
+    "siema": "^1.1.0",
+    "uuid": "^3.0.1"
   },
   "devDependencies": {
     "babel-core": "^6.3.15",

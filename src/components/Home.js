@@ -11,6 +11,8 @@ import DraftPasteProcessor from 'draft-js/lib/DraftPasteProcessor';
 import Frame from 'react-frame-component'
 import interact from 'interact.js'
 
+import Parser from 'html-react-parser';
+
 import Draggable, {DraggableCore} from 'react-draggable'; // Both at the same time
 
 import styles from '../css/style.css';
@@ -220,13 +222,38 @@ class MyComp extends Component {
     this.interactable = null;
   }
 
+  createMarkup() {
+    // return {
+    //   __html: "<div style='background:red;position:absolute;'>hello</div>"
+    // }
+    const html = '<div style="background:red;position:absolute;">Example HTML string</div><img src="https://scontent.xx.fbcdn.net/v/t1.0-1/c0.0.320.320/p320x320/15873276_10154860977474293_2459111570042632076_n.jpg?oh=2bf9c092c981dc9d8dc57c363f3b5f1b&oe=5923B5D6" width="100" height="100"/>';
+    // const html =
+    //   '<b>Bold text</b>, <i>Italic text</i><br/ ><br />' +
+    //   '<a href="http://www.facebook.com">Example link</a>' + 
+    //   '<img src="https://scontent.xx.fbcdn.net/v/t1.0-1/c0.0.320.320/p320x320/15873276_10154860977474293_2459111570042632076_n.jpg?oh=2bf9c092c981dc9d8dc57c363f3b5f1b&oe=5923B5D6" width="100" height="100"/>'
+    //   ;
+    const parsed = Parser(html);
+    console.log('parsed', parsed)
+    // return parsed
+    return Children.map(parsed, (child, idx) => {
+      const ref = `child${idx}`
+      return cloneElement(child, { ref });
+    })
+  }
+
   render() {
-    const { children } = this.props
-    return (<div className="dropzone" style={{float: 'left', border: '1px solid red', width: '500px', height: '300px', position: 'relative', overflow: 'hidden'}} > {
-        Children.map(children, (child, idx) => {
-          const ref = `child${idx}`
-          return cloneElement(child, { ref });
-      })} </div>)
+    const { children, html } = this.props
+    return (
+      <div className="dropzone" style={{float: 'left', border: '1px solid red', width: '500px', height: '300px', position: 'relative', overflow: 'hidden'}}>
+        {this.createMarkup()}
+      </div>
+    )
+
+    // return (<div className="dropzone" style={{float: 'left', border: '1px solid red', width: '500px', height: '300px', position: 'relative', overflow: 'hidden'}} > {
+    //     Children.map(children, (child, idx) => {
+    //       const ref = `child${idx}`
+    //       return cloneElement(child, { ref });
+    //   })} </div>)
   }
 }
 
@@ -351,7 +378,7 @@ class Home extends Component {
             />        
         </div>
         <div>
-          <MyComp id="first" childAttr={{'data-x':'value'}}>
+          <MyComp id="first" html="<p>hello</p>" childAttr={{'data-x':'value'}}>
             <img src="https://scontent.xx.fbcdn.net/v/t1.0-1/c0.0.320.320/p320x320/15873276_10154860977474293_2459111570042632076_n.jpg?oh=2bf9c092c981dc9d8dc57c363f3b5f1b&oe=5923B5D6" width="100" height="100" style={{position: 'absolute'}}/>
             <div style={{backgroundColor: 'yellow', display: 'table', position: 'absolute'}}>top frame</div>
             <div style={{backgroundColor: 'blue', display: 'table', position: 'absolute'}}>special image</div>
