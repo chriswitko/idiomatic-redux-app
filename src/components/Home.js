@@ -185,6 +185,7 @@ class MyComp extends Component {
               console.log('theCSSprop', theCSSprop)
               console.log('style', event.target.style.cssText)
               console.log('.ownerDocument.defaultView;', event.target.ownerDocument.defaultView)
+
           }
         }).resizable({
           preserveAspectRatio: true,
@@ -349,7 +350,9 @@ class Home extends Component {
   }
 
   getHtml() {
-    console.log('html', this.refs.first
+    let arr = Object.keys(this.refs.second.refs).map((k) => this.refs.first.refs[k])
+    const html = arr
+    console.log('html', html)
   }
 
   render() {
@@ -389,7 +392,7 @@ class Home extends Component {
             <div style={{backgroundColor: 'yellow', display: 'table', position: 'absolute'}}>top frame</div>
             <div style={{backgroundColor: 'blue', display: 'table', position: 'absolute'}}>special image</div>
           </MyComp>
-          <MyComp if="second" childAttr={{'data-x':'value'}}>
+          <MyComp ref="second" childAttr={{'data-x':'value'}}>
             <div style={{backgroundColor: 'yellow', display: 'table', position: 'absolute'}}>left frame</div>
             <div style={{backgroundColor: 'blue', display: 'table', position: 'absolute'}}>special image</div>
           </MyComp>
